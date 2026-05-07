@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12110f" />
+    <title>Fairway Forty Manga Reader</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="reader-topbar">
+        <a class="brand" href="#chapter-1/page-1" aria-label="Fairway Forty home">
+          <span class="brand-mark">40</span>
+          <span>
+            <strong>Fairway Forty</strong>
+            <small>Manga reader</small>
+          </span>
+        </a>
+
+        <div class="topbar-actions" aria-label="Reader controls">
+          <button class="icon-button" id="previousPage" type="button" title="Previous page" aria-label="Previous page">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <button class="icon-button" id="nextPage" type="button" title="Next page" aria-label="Next page">
+            <span aria-hidden="true">›</span>
+          </button>
+          <button class="icon-button" id="toggleMode" type="button" title="Switch reading mode" aria-label="Switch reading mode">
+            <span aria-hidden="true">▤</span>
+          </button>
+          <button class="icon-button" id="toggleTheme" type="button" title="Switch theme" aria-label="Switch theme">
+            <span aria-hidden="true">◐</span>
+          </button>
+        </div>
+      </header>
+
+      <aside class="library-panel" aria-label="Chapters">
+        <div class="library-heading">
+          <span>Chapters</span>
+          <span id="chapterCount">0</span>
+        </div>
+        <div class="chapter-list" id="chapterList"></div>
+      </aside>
+
+      <main class="reader-main">
+        <div class="reader-toolbar" aria-label="Reading settings">
+          <label class="select-field">
+            <span>Chapter</span>
+            <select id="chapterSelect"></select>
+          </label>
+
+          <label class="range-field">
+            <span>Zoom</span>
+            <input id="zoomRange" type="range" min="72" max="126" step="6" value="96" />
+          </label>
+
+          <label class="toggle-field">
+            <input id="directionToggle" type="checkbox" />
+            <span>RTL</span>
+          </label>
+        </div>
+
+        <section class="reader-stage" aria-live="polite">
+          <div class="page-meta">
+            <span id="chapterTitle">Chapter 1</span>
+            <span id="pageCounter">Page 1 / 10</span>
+          </div>
+
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressFill"></span>
+          </div>
+
+          <div class="pages" id="pages"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
