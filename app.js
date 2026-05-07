@@ -126,6 +126,7 @@ const dom = {
   progressFill: document.querySelector("#progressFill"),
   seriesSubtitle: document.querySelector("#seriesSubtitle"),
   seriesTitle: document.querySelector("#seriesTitle"),
+  storyBibleLink: document.querySelector("#storyBibleLink"),
   toggleMode: document.querySelector("#toggleMode"),
   toggleTheme: document.querySelector("#toggleTheme"),
   zoomRange: document.querySelector("#zoomRange"),
@@ -155,6 +156,8 @@ function init() {
   attachEvents();
   applyPreferences();
   renderReader({ scrollToPage: state.mode === "single" });
+  trackEvent("manga_open", getTrackingContext({ source: "initial_load" }));
+  trackCurrentPage("initial_load");
 }
 
 function renderSeriesMeta() {
@@ -210,12 +213,14 @@ function attachEvents() {
   dom.toggleMode.addEventListener("click", () => {
     state.mode = state.mode === "scroll" ? "single" : "scroll";
     renderReader({ scrollToPage: true });
+    trackEvent("reader_mode_change", getTrackingContext({ reader_mode: state.mode }));
     saveState();
   });
 
   dom.toggleTheme.addEventListener("click", () => {
     state.theme = state.theme === "dark" ? "light" : "dark";
     applyPreferences();
+    trackEvent("reader_theme_change", getTrackingContext({ theme: state.theme }));
     saveState();
   });
 
@@ -225,9 +230,18 @@ function attachEvents() {
     saveState();
   });
 
+  dom.zoomRange.addEventListener("change", () => {
+    trackEvent("reader_zoom_change", getTrackingContext({ zoom: state.zoom }));
+  });
+
   dom.directionToggle.addEventListener("change", () => {
     state.direction = dom.directionToggle.checked ? "rtl" : "ltr";
+    trackEvent("reader_direction_change", getTrackingContext({ direction: state.direction }));
     saveState();
+  });
+
+  dom.storyBibleLink.addEventListener("click", () => {
+    trackEvent("story_bible_open", getTrackingContext({ destination: "FairwayFourty.md" }));
   });
 
   window.addEventListener("keydown", (event) => {
@@ -254,6 +268,7 @@ function attachEvents() {
 
     if (previousChapter !== state.chapterIndex) {
       renderReader({ scrollToPage: true });
+      trackCurrentPage("hash_navigation");
     } else {
       syncUi();
       if (state.mode === "single") {
@@ -261,6 +276,7 @@ function attachEvents() {
       } else {
         scrollToCurrentPage();
       }
+      trackCurrentPage("hash_navigation");
     }
   });
 }
@@ -351,6 +367,7 @@ function observePages() {
 
       state.pageIndex = nextPageIndex;
       syncUi({ updateHash: false });
+      trackCurrentPage("scroll");
       saveState();
     },
     {
@@ -412,6 +429,8 @@ function setChapter(chapterIndex, pageIndex) {
   state.pageIndex = pageIndex;
   clampState();
   renderReader({ scrollToPage: true });
+  trackEvent("chapter_select", getTrackingContext({ source: "chapter_control" }));
+  trackCurrentPage("chapter_select");
   saveState();
 }
 
@@ -446,6 +465,14 @@ function turnPage(step) {
     scrollToCurrentPage();
   }
 
+  trackEvent(
+    "reader_page_turn",
+    getTrackingContext({
+      step,
+      source: "page_button_or_keyboard",
+    }),
+  );
+  trackCurrentPage("page_turn");
   saveState();
 }
 
@@ -456,6 +483,36 @@ function scrollToCurrentPage() {
 
 function getCurrentChapter() {
   return chapters[state.chapterIndex];
+}
+
+function getTrackingContext(extra = {}) {
+  const chapter = getCurrentChapter();
+  const page = chapter.pages[state.pageIndex];
+
+  return {
+    series_title: MANGA.title,
+    chapter_id: chapter.id,
+    chapter_index: state.chapterIndex + 1,
+    chapter_title: chapter.title,
+    page_number: page.number,
+    page_index_in_chapter: state.pageIndex + 1,
+    page_title: page.title,
+    planned_pages: MANGA.plannedPages,
+    available_pages: MANGA.availablePages,
+    reader_mode: state.mode,
+    theme: state.theme,
+    direction: state.direction,
+    zoom: state.zoom,
+    ...extra,
+  };
+}
+
+function trackCurrentPage(source) {
+  trackEvent("manga_page_view", getTrackingContext({ source }));
+}
+
+function trackEvent(name, params = {}) {
+  window.trackFairwayEvent?.(name, params);
 }
 
 function clamp(value, min, max) {

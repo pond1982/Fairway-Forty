@@ -41,7 +41,7 @@
           <p>
             A working dad discovers golf in his 40s, then accidentally turns family life into five lessons.
           </p>
-          <a href="FairwayFourty.md">Story bible</a>
+          <a id="storyBibleLink" href="FairwayFourty.md">Story bible</a>
         </div>
 
         <div class="library-heading">
@@ -84,6 +84,13 @@
       </main>
     </div>
 
+    <script>
+      window.fairwayAnalyticsQueue = [];
+      window.trackFairwayEvent = (name, params = {}) => {
+        window.fairwayAnalyticsQueue.push([name, params]);
+      };
+    </script>
+    <script type="module" src="firebase-tracking.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
