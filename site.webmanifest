@@ -1,0 +1,13 @@
+{
+  "name": "Fairway Forty",
+  "short_name": "Fairway Forty",
+  "description": "A mobile-friendly golf manga reader about Ben Hogan-inspired fundamentals, family comedy, and one repeatable swing.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#12110f",
+  "theme_color": "#12110f",
+  "orientation": "portrait-primary",
+  "categories": ["books", "comics", "sports", "entertainment"],
+  "lang": "en"
+}

@@ -1,8 +1,8 @@
-# Fairway After Forty
+# Fairway Forty
 
-> **Handoff Bible / Development Guide**  
-> Working filename requested by creator: `FairwayFourty.md`  
-> Canonical project title: **Fairway After Forty**  
+> **Handoff Bible / Development Guide**
+> Working filename requested by creator: `FairwayForty.md`
+> Canonical project title: **Fairway Forty**
 > Format: 45-page full-color sports manga / family comedy  
 > Current stage: concept, script, visual direction, and draft pages 1–40 generated as image assets. Pages 41–45 remain the next production target.
 
@@ -10,7 +10,7 @@
 
 ## 1. Elevator Pitch
 
-**Fairway After Forty** is a light-hearted sports manga about a full-time working dad who discovers golf in his 40s while balancing marriage, fatherhood, deadlines, snacks, and the suspiciously expensive phrase “just one more bucket.”
+**Fairway Forty** is a light-hearted sports manga about a full-time working dad who discovers golf in his 40s while balancing marriage, fatherhood, deadlines, snacks, and the suspiciously expensive phrase “just one more bucket.”
 
 The main character joins a company Family Day Charity Golf Scramble after learning the winning team earns a donation toward a children’s playground. He is not naturally gifted. His early swing behaves like office stress wearing golf shoes. But with help from his wife, his 2-year-old daughter, a mysterious range attendant, and a battered copy of Ben Hogan’s **Five Lessons**, he learns that golf is not about swinging harder. It is about fundamentals, sequence, patience, and showing up.
 
@@ -34,7 +34,7 @@ The story is **not** about becoming young again. It is about becoming repeatable
 ## 3. Canonical Title, Tagline, and Logline
 
 ### Title
-**Fairway After Forty**
+**Fairway Forty**
 
 ### Optional Subtitle
 **Five Lessons, One Tiny Coach, and a Dad Who Refuses to Slice Forever**
@@ -1377,7 +1377,7 @@ There are several collage outputs in `/mnt/data/` with names like `a_full_color_
 Use this as the base prompt for future image generation or artist briefing.
 
 ```text
-Create a full-color manga/comic page in the established Fairway After Forty art style. Use the same main character from the uploaded references: adult dad golfer in his 40s, black wavy hair, black rectangular glasses, short beard and mustache, royal blue polo, gray cargo pants, bright orange golf shoes, white golf glove, black smartwatch. Keep his broad dad-golfer build and expressive face consistent.
+Create a full-color manga/comic page in the established Fairway Forty art style. Use the same main character from the uploaded references: adult dad golfer in his 40s, black wavy hair, black rectangular glasses, short beard and mustache, royal blue polo, gray cargo pants, bright orange golf shoes, white golf glove, black smartwatch. Keep his broad dad-golfer build and expressive face consistent.
 
 Style: clean manga line art with watercolor/colored-pencil shading, expressive sports-comedy faces, bold black panel borders, white gutters, dynamic motion lines, readable instructional callouts, navy and yellow title accents, warm family-comedy tone.
 
@@ -1501,13 +1501,13 @@ Before a page is approved, check:
 ## 20. Suggested Folder Structure for Production
 
 ```text
-FairwayAfterForty/
+FairwayForty/
   00_reference/
     character_refs/
     style_refs/
     infographic_refs/
   01_script/
-    FairwayFourty.md
+    FairwayForty.md
     page_scripts/
   02_storyboards/
     p01_p45_thumbnails/

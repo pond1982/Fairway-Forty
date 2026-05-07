@@ -1,8 +1,11 @@
 const MANGA = {
-  title: "Fairway After Forty",
+  title: "Fairway Forty",
+  seoTitle: "Fairway Forty | Golf Manga Reader",
   subtitle: "Five Lessons, One Tiny Coach, and a Dad Who Refuses to Slice Forever",
   tagline: "Not fast. Not perfect. Repeatable.",
-  availablePages: 30,
+  description:
+    "A full-color golf manga about a working dad learning Ben Hogan-inspired fundamentals through family comedy and sports manga action.",
+  availablePages: 40,
   plannedPages: 45,
 };
 
@@ -37,6 +40,16 @@ const pageFiles = [
   "ChatGPT Image 7 พ.ค. 2569 16_06_48 (8).png",
   "ChatGPT Image 7 พ.ค. 2569 16_06_48 (9).png",
   "ChatGPT Image 7 พ.ค. 2569 16_06_48 (10).png",
+  "fairway-forty-page-31.png",
+  "fairway-forty-page-32.png",
+  "fairway-forty-page-33.png",
+  "fairway-forty-page-34.png",
+  "fairway-forty-page-35.png",
+  "fairway-forty-page-36.png",
+  "fairway-forty-page-37.png",
+  "fairway-forty-page-38.png",
+  "fairway-forty-page-39.png",
+  "fairway-forty-page-40.png",
 ];
 
 const pageTitles = [
@@ -70,6 +83,16 @@ const pageTitles = [
   "The First Arc",
   "Lesson Four Title Page",
   "The Lunge Monster",
+  "The Napkin Sequence",
+  "Playground Transition",
+  "Learning to Shift",
+  "Impact Is a Doorway",
+  "The Work-Life Sequence",
+  "Last Practice Before the Scramble",
+  "Full Swing Spread",
+  "Tournament Morning",
+  "First Tee Terror",
+  "The Comedy Hole",
 ];
 
 const allPages = pageFiles.map((file, index) => ({
@@ -108,6 +131,12 @@ const chapters = [
     title: "Lesson Four: The Second Part",
     note: "Pages 29-30 available",
     pages: allPages.slice(28, 30),
+  },
+  {
+    id: "chapter-6",
+    title: "Lesson Five: Sequence and Review",
+    note: "Pages 31-40",
+    pages: allPages.slice(30, 40),
   },
 ];
 
@@ -155,13 +184,13 @@ function init() {
   renderChapterSelect();
   attachEvents();
   applyPreferences();
-  renderReader({ scrollToPage: state.mode === "single" });
+  renderReader({ scrollToPage: Boolean(window.location.hash) });
   trackEvent("manga_open", getTrackingContext({ source: "initial_load" }));
   trackCurrentPage("initial_load");
 }
 
 function renderSeriesMeta() {
-  document.title = MANGA.title;
+  document.title = MANGA.seoTitle;
   dom.seriesTitle.textContent = MANGA.title;
   dom.seriesSubtitle.textContent = `${MANGA.availablePages} of ${MANGA.plannedPages} pages available`;
 }
@@ -241,7 +270,7 @@ function attachEvents() {
   });
 
   dom.storyBibleLink.addEventListener("click", () => {
-    trackEvent("story_bible_open", getTrackingContext({ destination: "FairwayFourty.md" }));
+    trackEvent("story_bible_open", getTrackingContext({ destination: "FairwayForty.md" }));
   });
 
   window.addEventListener("keydown", (event) => {
@@ -345,8 +374,9 @@ function createPageFrame(chapter, pageIndex, lazy) {
 
   const img = document.createElement("img");
   img.src = page.file;
-  img.alt = `${MANGA.title}, page ${page.number}: ${page.title}`;
+  img.alt = `${MANGA.title} golf manga page ${page.number}: ${page.title}`;
   img.decoding = "async";
+  if (page.number === 1 || pageIndex === 0) img.fetchPriority = "high";
   if (lazy) img.loading = "lazy";
 
   frame.append(img);
@@ -478,7 +508,16 @@ function turnPage(step) {
 
 function scrollToCurrentPage() {
   const page = document.querySelector(`[data-page-index="${state.pageIndex}"]`);
-  page?.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!page) return;
+
+  const targetTop = page.getBoundingClientRect().top + window.scrollY - getStickyOffset();
+  window.scrollTo({ behavior: "smooth", top: Math.max(0, targetTop) });
+}
+
+function getStickyOffset() {
+  const topbar = document.querySelector(".reader-topbar")?.getBoundingClientRect().height || 0;
+  const toolbar = document.querySelector(".reader-toolbar")?.getBoundingClientRect().height || 0;
+  return topbar + toolbar + 14;
 }
 
 function getCurrentChapter() {
