@@ -5,49 +5,90 @@ import {
   logEvent,
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDr8PlVWZps2ivtj-vSa79_O1-WbvBe7ds",
-  authDomain: "fairway-forty.firebaseapp.com",
-  projectId: "fairway-forty",
-  storageBucket: "fairway-forty.firebasestorage.app",
-  messagingSenderId: "622054965649",
-  appId: "1:622054965649:web:a33c0dcaed0231e4219a30",
-  measurementId: "G-CKFWX2FXFB",
-};
-
-const app = initializeApp(firebaseConfig);
+const FIREBASE_INIT_CONFIG_URL = "/__/firebase/init.json";
 const queuedEvents = window.fairwayAnalyticsQueue || [];
 
 let analytics = null;
 
-window.fairwayFirebaseApp = app;
-
-isSupported()
-  .then((supported) => {
-    if (!supported) {
-      queuedEvents.length = 0;
-      window.trackFairwayEvent = () => {};
+loadFirebaseConfig()
+  .then((firebaseConfig) => {
+    if (!firebaseConfig) {
+      disableTracking("Firebase runtime config was not found.");
       return;
     }
 
-    analytics = getAnalytics(app);
-    window.fairwayFirebaseAnalytics = analytics;
-    window.trackFairwayEvent = trackFairwayEvent;
+    const app = initializeApp(firebaseConfig);
+    window.fairwayFirebaseApp = app;
 
-    while (queuedEvents.length > 0) {
-      const [name, params] = queuedEvents.shift();
-      trackFairwayEvent(name, params);
-    }
+    return isSupported().then((supported) => {
+      if (!supported) {
+        disableTracking("Firebase analytics is not supported in this browser.");
+        return;
+      }
 
-    trackFairwayEvent("firebase_tracking_ready", {
-      project_id: firebaseConfig.projectId,
+      analytics = getAnalytics(app);
+      window.fairwayFirebaseAnalytics = analytics;
+      window.trackFairwayEvent = trackFairwayEvent;
+
+      while (queuedEvents.length > 0) {
+        const [name, params] = queuedEvents.shift();
+        trackFairwayEvent(name, params);
+      }
+
+      trackFairwayEvent("firebase_tracking_ready", {
+        project_id: app.options.projectId,
+      });
     });
   })
   .catch((error) => {
-    queuedEvents.length = 0;
-    window.trackFairwayEvent = () => {};
+    disableTracking("Firebase analytics could not start.");
     console.warn("Firebase analytics could not start.", error);
   });
+
+async function loadFirebaseConfig() {
+  if (window.FAIRWAY_FIREBASE_CONFIG) {
+    return window.FAIRWAY_FIREBASE_CONFIG;
+  }
+
+  if (isLocalPreview()) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(FIREBASE_INIT_CONFIG_URL, {
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) return null;
+
+    const firebaseConfig = await response.json();
+    if (!firebaseConfig?.apiKey || !firebaseConfig?.appId || !firebaseConfig?.projectId) {
+      return null;
+    }
+
+    return firebaseConfig;
+  } catch {
+    return null;
+  }
+}
+
+function isLocalPreview() {
+  return (
+    location.protocol === "file:" ||
+    location.hostname === "localhost" ||
+    location.hostname === "127.0.0.1" ||
+    location.hostname === "::1"
+  );
+}
+
+function disableTracking(reason) {
+  queuedEvents.length = 0;
+  window.trackFairwayEvent = () => {};
+  window.fairwayAnalyticsDisabledReason = reason;
+}
 
 function trackFairwayEvent(name, params = {}) {
   if (!analytics) {
