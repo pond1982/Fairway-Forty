@@ -1,51 +1,113 @@
+const MANGA = {
+  title: "Fairway After Forty",
+  subtitle: "Five Lessons, One Tiny Coach, and a Dad Who Refuses to Slice Forever",
+  tagline: "Not fast. Not perfect. Repeatable.",
+  availablePages: 30,
+  plannedPages: 45,
+};
+
+const pageFiles = [
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (1).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (2).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (3).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (4).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (5).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (6).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (7).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (8).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (9).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_06 (10).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (1).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (2).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (3).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (4).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (5).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (6).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (7).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (8).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (9).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_34 (10).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (1).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (2).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (3).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (4).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (5).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (6).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (7).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (8).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (9).png",
+  "ChatGPT Image 7 พ.ค. 2569 16_06_48 (10).png",
+];
+
+const pageTitles = [
+  "The Adult Life Opening Splash",
+  "The Challenge Appears",
+  "The Household Negotiation",
+  "First Contact with Golf",
+  "The Book Finds You",
+  "Lesson One Title Page: The Grip",
+  "Angry Hands",
+  "The Crayon Revelation",
+  "Rebuilding the Hold",
+  "The Lunch-Break Montage",
+  "Office Grip",
+  "First Clean Contact",
+  "Lesson One Badge",
+  "Lesson Two Title Page",
+  "Feet Are Soup",
+  "The Toy Cleanup Drill",
+  "Building the Base",
+  "Zoom Meeting Posture Curse",
+  "The First Real Sound",
+  "The Toddler Ball Position Test",
+  "Lesson Three Title Page",
+  "The Panic Takeaway",
+  "Brad's Bad Advice",
+  "Stroller Takeaway",
+  "The Slow Start Montage",
+  "Mid-Backswing Mechanics",
+  "Top of the Swing, Top of the Panic",
+  "The First Arc",
+  "Lesson Four Title Page",
+  "The Lunge Monster",
+];
+
+const allPages = pageFiles.map((file, index) => ({
+  file,
+  number: index + 1,
+  title: pageTitles[index],
+}));
+
 const chapters = [
   {
     id: "chapter-1",
-    title: "Chapter 1",
-    pages: [
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (1).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (2).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (3).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (4).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (5).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (6).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (7).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (8).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (9).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_06 (10).png",
-    ],
+    title: "Opening: The Call to Golf",
+    note: "Pages 1-5",
+    pages: allPages.slice(0, 5),
   },
   {
     id: "chapter-2",
-    title: "Chapter 2",
-    pages: [
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (1).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (2).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (3).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (4).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (5).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (6).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (7).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (8).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (9).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_34 (10).png",
-    ],
+    title: "Lesson One: The Grip",
+    note: "Pages 6-13",
+    pages: allPages.slice(5, 13),
   },
   {
     id: "chapter-3",
-    title: "Chapter 3",
-    pages: [
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (1).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (2).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (3).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (4).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (5).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (6).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (7).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (8).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (9).png",
-      "ChatGPT Image 7 พ.ค. 2569 16_06_48 (10).png",
-    ],
+    title: "Lesson Two: Stance and Posture",
+    note: "Pages 14-20",
+    pages: allPages.slice(13, 20),
+  },
+  {
+    id: "chapter-4",
+    title: "Lesson Three: The First Part",
+    note: "Pages 21-28",
+    pages: allPages.slice(20, 28),
+  },
+  {
+    id: "chapter-5",
+    title: "Lesson Four: The Second Part",
+    note: "Pages 29-30 available",
+    pages: allPages.slice(28, 30),
   },
 ];
 
@@ -62,6 +124,8 @@ const dom = {
   pages: document.querySelector("#pages"),
   previousPage: document.querySelector("#previousPage"),
   progressFill: document.querySelector("#progressFill"),
+  seriesSubtitle: document.querySelector("#seriesSubtitle"),
+  seriesTitle: document.querySelector("#seriesTitle"),
   toggleMode: document.querySelector("#toggleMode"),
   toggleTheme: document.querySelector("#toggleTheme"),
   zoomRange: document.querySelector("#zoomRange"),
@@ -83,6 +147,7 @@ let saveTimer = null;
 init();
 
 function init() {
+  renderSeriesMeta();
   hydrateStateFromHash();
   clampState();
   renderLibrary();
@@ -90,6 +155,12 @@ function init() {
   attachEvents();
   applyPreferences();
   renderReader({ scrollToPage: state.mode === "single" });
+}
+
+function renderSeriesMeta() {
+  document.title = MANGA.title;
+  dom.seriesTitle.textContent = MANGA.title;
+  dom.seriesSubtitle.textContent = `${MANGA.availablePages} of ${MANGA.plannedPages} pages available`;
 }
 
 function readSavedState() {
@@ -204,11 +275,12 @@ function renderLibrary() {
       button.dataset.chapterIndex = String(index);
       button.innerHTML = `
         <span class="chapter-cover">
-          <img src="${chapter.pages[0]}" alt="" loading="lazy" />
+          <img src="${chapter.pages[0].file}" alt="" loading="lazy" />
         </span>
         <span class="chapter-copy">
           <strong>${chapter.title}</strong>
           <span>${chapter.pages.length} pages</span>
+          <em>${chapter.note}</em>
         </span>
       `;
       button.addEventListener("click", () => setChapter(index, 0));
@@ -222,7 +294,7 @@ function renderChapterSelect() {
     ...chapters.map((chapter, index) => {
       const option = document.createElement("option");
       option.value = String(index);
-      option.textContent = chapter.title;
+      option.textContent = `${chapter.title} (${chapter.note})`;
       return option;
     }),
   );
@@ -250,13 +322,14 @@ function renderReader({ scrollToPage = false } = {}) {
 }
 
 function createPageFrame(chapter, pageIndex, lazy) {
+  const page = chapter.pages[pageIndex];
   const frame = document.createElement("figure");
   frame.className = "page-frame";
   frame.dataset.pageIndex = String(pageIndex);
 
   const img = document.createElement("img");
-  img.src = chapter.pages[pageIndex];
-  img.alt = `${chapter.title}, page ${pageIndex + 1}`;
+  img.src = page.file;
+  img.alt = `${MANGA.title}, page ${page.number}: ${page.title}`;
   img.decoding = "async";
   if (lazy) img.loading = "lazy";
 
@@ -297,8 +370,9 @@ function disconnectObserver() {
 
 function syncUi({ updateHash = true } = {}) {
   const chapter = getCurrentChapter();
-  dom.chapterTitle.textContent = chapter.title;
-  dom.pageCounter.textContent = `Page ${state.pageIndex + 1} / ${chapter.pages.length}`;
+  const page = chapter.pages[state.pageIndex];
+  dom.chapterTitle.textContent = `${chapter.title} · ${page.title}`;
+  dom.pageCounter.textContent = `P${page.number} / ${MANGA.plannedPages} · ${state.pageIndex + 1} / ${chapter.pages.length}`;
   dom.chapterSelect.value = String(state.chapterIndex);
   dom.directionToggle.checked = state.direction === "rtl";
   dom.zoomRange.value = String(state.zoom);
@@ -313,7 +387,7 @@ function syncUi({ updateHash = true } = {}) {
   dom.previousPage.disabled = state.chapterIndex === 0 && state.pageIndex === 0;
   dom.nextPage.disabled =
     state.chapterIndex === chapters.length - 1 && state.pageIndex === chapter.pages.length - 1;
-  dom.progressFill.style.width = `${((state.pageIndex + 1) / chapter.pages.length) * 100}%`;
+  dom.progressFill.style.width = `${(page.number / MANGA.plannedPages) * 100}%`;
 
   document.querySelectorAll(".chapter-card").forEach((card) => {
     card.classList.toggle("active", Number(card.dataset.chapterIndex) === state.chapterIndex);

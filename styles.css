@@ -171,6 +171,39 @@ button {
   background: color-mix(in srgb, var(--panel) 82%, transparent);
 }
 
+.series-card {
+  display: grid;
+  gap: 8px;
+  margin: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel-strong) 70%, var(--panel));
+}
+
+.series-card span {
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.series-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.series-card a {
+  justify-self: start;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration-color: var(--accent-3);
+  text-underline-offset: 4px;
+}
+
 .library-heading {
   display: flex;
   align-items: center;
@@ -245,6 +278,18 @@ button {
   margin-top: 8px;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.chapter-copy em {
+  display: block;
+  margin-top: 4px;
+  overflow: hidden;
+  color: color-mix(in srgb, var(--accent-2) 82%, var(--muted));
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .reader-main {
@@ -433,6 +478,15 @@ button {
 
   .library-heading {
     padding: 12px 12px 8px;
+  }
+
+  .series-card {
+    margin: 10px 12px;
+    padding: 12px;
+  }
+
+  .series-card p {
+    display: none;
   }
 
   .chapter-list {

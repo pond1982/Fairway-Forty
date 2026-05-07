@@ -4,18 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#12110f" />
-    <title>Fairway Forty Manga Reader</title>
+    <title>Fairway After Forty</title>
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="reader-topbar">
-        <a class="brand" href="#chapter-1/page-1" aria-label="Fairway Forty home">
+        <a class="brand" href="#chapter-1/page-1" aria-label="Fairway After Forty home">
           <span class="brand-mark">40</span>
           <span>
-            <strong>Fairway Forty</strong>
-            <small>Manga reader</small>
+            <strong id="seriesTitle">Fairway After Forty</strong>
+            <small id="seriesSubtitle">30 of 45 pages available</small>
           </span>
         </a>
 
@@ -36,8 +36,16 @@
       </header>
 
       <aside class="library-panel" aria-label="Chapters">
+        <div class="series-card">
+          <span>Not fast. Not perfect. Repeatable.</span>
+          <p>
+            A working dad discovers golf in his 40s, then accidentally turns family life into five lessons.
+          </p>
+          <a href="FairwayFourty.md">Story bible</a>
+        </div>
+
         <div class="library-heading">
-          <span>Chapters</span>
+          <span>Story</span>
           <span id="chapterCount">0</span>
         </div>
         <div class="chapter-list" id="chapterList"></div>
